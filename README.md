@@ -25,6 +25,7 @@
 **7. You can restart the whole game by clicking the RESTART button.**
 
 
+-------------------------------------------------------------------------------------
 features to add later:
 
 - Make the computer itself play the game. 
