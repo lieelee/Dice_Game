@@ -6,5 +6,4 @@
 ## How To Play
 
 **Pick a score number. You can pick a random score with '?'**
-![2022-05-09 19 11 09](https://user-images.githubusercontent.com/104736314/167560506-bfa328d4-7a98-4629-8114-dde2aac4f2b6.gif)
-
+<img width="400" alt="Screen Shot 2022-05-09 at 11 10 38 PM" src="https://user-images.githubusercontent.com/104736314/167560831-275b89e2-28b5-4a82-92e0-505ae8dcde59.png">
