@@ -5,5 +5,18 @@
 
 ## How To Play
 
-**Pick a score number. You can pick a random score with '?'**
+**1. Pick a score number. You can pick a random score with '?'**
+
 <img width="400" alt="Screen Shot 2022-05-09 at 11 10 38 PM" src="https://user-images.githubusercontent.com/104736314/167560831-275b89e2-28b5-4a82-92e0-505ae8dcde59.png">
+
+**2. You roll the dice first. 
+
+**3. When you get the dice "1", You lose all the points and it becomes the computer's turn. 
+
+**4. If you want to play safe and save the points, press the hold button. The points will be added to the current score. 
+
+**5. As the game is played, the possibility of a win is displayed. When the character is close to winning, the winning rate is displayed in red. 
+
+**6. The duration of the game is 1 minute and 30 seconds. If time is over, both characters would lose the game. 
+
+**7. You can restart the whole game by clicking the RESTART button. 
