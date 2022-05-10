@@ -17,10 +17,9 @@
 
 **5. As the game is played, the possibility of a win is displayed underneath. When the character is close to winning, the winning rate is displayed in red. 
 
+<img width="400" alt="Screen Shot 2022-05-09 at 11 41 42 PM" src="https://user-images.githubusercontent.com/104736314/167564521-a5e61478-da0a-4497-83ce-608b210bd98f.png">
 
-<img width="400" alt="Screen Shot 2022-05-09 at 11 11 24 PM" src="https://user-images.githubusercontent.com/104736314/167564267-f86c5109-0ee7-46b9-b677-241a369b0c42.png">
 
-
-**6. The duration of the game is 1 minute and 30 seconds. If time is over, both characters would lose the game. 
+**6. The duration of the game is 1 minute and 30 seconds. If time is over, both characters would lose the game. The timer is on the middle bottom. 
 
 **7. You can restart the whole game by clicking the RESTART button. 
