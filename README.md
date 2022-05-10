@@ -13,9 +13,13 @@
 
 **3. When you get the dice "1", You lose all the points and it becomes the computer's turn. 
 
-**4. If you want to play safe and save the points, press the hold button. The points will be added to the current score. 
+**4. If you want to play safe and save the points, press the Hold button. The points will be added to the current score. 
 
-**5. As the game is played, the possibility of a win is displayed. When the character is close to winning, the winning rate is displayed in red. 
+**5. As the game is played, the possibility of a win is displayed underneath. When the character is close to winning, the winning rate is displayed in red. 
+
+
+<img width="400" alt="Screen Shot 2022-05-09 at 11 11 24 PM" src="https://user-images.githubusercontent.com/104736314/167564267-f86c5109-0ee7-46b9-b677-241a369b0c42.png">
+
 
 **6. The duration of the game is 1 minute and 30 seconds. If time is over, both characters would lose the game. 
 
