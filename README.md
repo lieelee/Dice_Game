@@ -23,3 +23,9 @@
 **6. The duration of the game is 1 minute and 30 seconds. If time is over, both characters would lose the game. The timer is on the middle bottom.** 
 
 **7. You can restart the whole game by clicking the RESTART button.**
+
+
+A feature to add later:
+
+- Make the computer itself play the game. 
+- 10 seconds timer for each round and when the time is over, switch the player. 
