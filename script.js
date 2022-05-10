@@ -1,89 +1,189 @@
-'use strict';
-
-let scores = [0, 0];
-let score0 = document.getElementById('score--0');
-let score1 = document.getElementById('score--1');
-let current0 = document.getElementById('current--0');
-let current1 = document.getElementById('current--1');
-const diceEl = document.querySelector('.dice');
-const player0 = document.querySelector('.player--0');
-const player1 = document.querySelector('.player--1');
-let activePlayer = 0;
+// declare variables
+let score = [0, 0];
+// let winR = [0, 0];
+let player0 = document.querySelector(".player-0");
+let player1 = document.querySelector(".player-1");
+let score0 = document.getElementById("score-0");
+let score1 = document.getElementById("score-1");
+let current0 = document.getElementById("current-0");
+let current1 = document.getElementById("current-1");
+let winRate0 = document.getElementById("win-0");
+let winRate1 = document.getElementById("win-1");
+let dice = document.querySelector(".dice");
 let playing = true;
-
-diceEl.classList.add('hidden');
+let activePlayer;
 let currentScore;
+let diceNumber;
 
-//default condition
-const defaultCondition = function () {
-  scores = [0, 0];
-  currentScore = 0;
-  current0.textContent = 0;
-  current1.textContent = 0;
+// =============== Timer ============================//
+const timer = document.querySelector(".timer");
+let timeSecond;
+let min;
+let sec;
+let interval = false;
+let running = false;
+
+const countDown = () => {
+  if (timeSecond > 0) {
+    timeSecond = timeSecond - 0.1;
+    min = Math.floor(timeSecond / 60);
+    sec = Math.floor(timeSecond % 60);
+    console.log(min, sec);
+    timer.innerHTML = `⏳${min < 10 ? "0" : ""}${min}:${
+      sec < 10 ? "0" : ""
+    }${sec}`;
+  } else {
+    timer.classList.add("time-out");
+    timer.innerHTML = "⌛️ Time Over";
+    setTimeout(() => {
+      clearInterval(interval);
+      running = false;
+      document.getElementById("score-0").textContent = "⌛️";
+      document.getElementById("score-1").textContent = "⌛️";
+    }, 1000);
+  }
+};
+
+const countDown2 = () => {
+  if (running) return;
+  timeSecond = 100;
+  running = true;
+  interval = setInterval(countDown, 100);
+};
+
+// pick a number
+
+// default-restart game
+const start = () => {
   score0.textContent = 0;
   score1.textContent = 0;
-  playing = true;
-  diceEl.src = 'dice-1.png';
-
-  diceEl.classList.add('hidden');
-  player0.classList.remove('player--winner');
-  player1.classList.remove('player--winner');
-  player0.classList.add('player--active');
-  player1.classList.remove('player--active');
-};
-
-defaultCondition();
-
-//Switch users when a player encounters dice 1 or clicks hold button.
-const switchUser = function () {
-  activePlayer = activePlayer === 0 ? 1 : 0; //Switch the active player
-  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  current0.textContent = 0;
+  current1.textContent = 0;
+  winRate0.textContent = 0;
+  winRate1.textContent = 0;
+  score = [0, 0];
+  winR = [0, 0];
+  activePlayer = 0;
   currentScore = 0;
-  player0.classList.toggle('player--active');
-  player1.classList.toggle('player--active');
+  playing = true;
+  dice.src = "/img/dice-1.png";
+  document.querySelector(".robot").classList.remove("winner");
+  document.querySelector(".human").classList.remove("winner");
+  player0.classList.add("player-active");
+  player1.classList.remove("player-active");
+  player0.classList.remove("player-break");
+  player1.classList.add("player-break");
+  document.querySelectorAll(".win-possibility-score")[0].style.color = "black";
+  document.querySelectorAll(".win-possibility-score")[1].style.color = "black";
+  document.querySelector(".timer").classList.remove("time-out");
+  timer.innerHTML = "⏳ Go";
 };
 
-//Dice hold button
-document.querySelector('.btn--hold').addEventListener('click', function () {
-  diceEl.src = 'dice-1.png';
-
-  //Hold button works only when the game is still playing.
-  if (playing) {
-    scores[activePlayer] += currentScore;
-    document.getElementById(`score--${activePlayer}`).textContent =
-      scores[activePlayer];
-    document.getElementById(`current--${activePlayer}`).textContent = 0;
+const reset = () => {
+  //   console.log(document.getElementById("display-main").className);
+  if (document.getElementById("display-main").className) {
+    document
+      .querySelector(".user-input")
+      .addEventListener("click", function () {
+        diceNumber = event.target.value;
+        if (diceNumber == "?") {
+          diceNumber = Math.trunc(Math.random() * 25 + 1);
+        }
+        // console.log(diceNumber);
+        document.getElementById("display-main").classList.remove("display");
+        document.querySelector(".user-input").style.display = "none";
+      });
+  } else {
+    document.getElementById("display-main").classList.add("display");
+    document.querySelector(".user-input").style.display = "";
+    document
+      .querySelector(".user-input")
+      .addEventListener("click", function () {
+        diceNumber = event.target.value;
+        if (diceNumber == "?") {
+          diceNumber = Math.trunc(Math.random() * 25 + 1);
+        }
+        // console.log(diceNumber);
+        document.getElementById("display-main").classList.remove("display");
+        document.querySelector(".user-input").style.display = "none";
+      });
   }
-  //If the score is higher than 20, that player wins.
-  if (Number(score0.textContent) >= 20) {
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.add('player--winner');
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.remove('player--active');
-    console.log('win!');
-    playing = false; //To stop playing
-  } else switchUser();
-});
+  console.log("diceNumber:", diceNumber);
+  start();
+};
+reset();
 
-//Dice rolling
-document.querySelector('.btn--roll').addEventListener('click', function () {
+//  ===================== switching users ==================//
+const switchingPlayer = () => {
+  //   score[activePlayer] = 0;
+  timer.classList.remove("time-out");
+  activePlayer = activePlayer == 0 ? 1 : 0;
+  dice.src = "/img/dice-1.png";
+  currentScore = 0;
+  player0.classList.toggle("player-active");
+  player1.classList.toggle("player-active");
+  player0.classList.toggle("player-break");
+  player1.classList.toggle("player-break");
+  winRate0.textContent = ((score[0] / diceNumber) * 100).toFixed(2) + "%";
+  winRate1.textContent = ((score[1] / diceNumber) * 100).toFixed(2) + "%";
+  almostWin();
+};
+
+//===================== rolling the dice========================//
+document.querySelector(".btn-roll").addEventListener("click", function () {
   if (playing) {
-    diceEl.classList.remove('hidden');
-    let diceNumber = Math.trunc(Math.random() * 6 + 1); //Generate the random number 1~6
-    diceEl.src = `dice-${diceNumber}.png`; //Display the proper dice picture
+    let number = Math.trunc(Math.random() * 6 + 1);
+    dice.src = `/img/dice-${number}.png`;
+    // score[activePlayer] = score[activePlayer] + number;
+    //   `score${activePlayer}`.textContent = number; < string 'score0'
+    currentScore = currentScore + number;
+    document.getElementById(`score-${activePlayer}`).textContent = currentScore;
+    if (activePlayer == 0)
+      winRate0.textContent =
+        (((currentScore + score[0]) / diceNumber) * 100).toFixed(2) + "%";
+    else if (activePlayer == 1)
+      winRate1.textContent =
+        (((currentScore + score[1]) / diceNumber) * 100).toFixed(2) + "%";
+    almostWin();
+    if (number == 1) {
+      // console.log(currentScore);
+      document.getElementById(`score-${activePlayer}`).textContent = 0;
 
-    if (diceNumber !== 1) {
-      currentScore += diceNumber;
-      document.getElementById(
-        `current--${activePlayer}`
-      ).textContent = currentScore;
-    } else if (diceNumber == 1) {
-      //If the user gets dice 1, change the user and lose all the current score!!!!!!!!
-      switchUser();
+      switchingPlayer();
     }
+    countDown2();
   }
 });
-//To start the new game.
-document.querySelector('.btn--new').addEventListener('click', defaultCondition);
+
+//=============================hold===========================//
+document.querySelector(".btn-hold").addEventListener("click", function () {
+  if (playing) {
+    score[activePlayer] = score[activePlayer] + currentScore;
+    document.getElementById(`current-${activePlayer}`).textContent =
+      score[activePlayer];
+    document.getElementById(`score-${activePlayer}`).textContent = 0;
+
+    // console.log(score[activePlayer], currentScore);
+  }
+  if (Number(score[0]) >= diceNumber || Number(score[1] >= diceNumber)) {
+    let winner;
+    console.log("win!");
+    winner = activePlayer == 0 ? "human" : "robot";
+    document.querySelector(`.${winner}`).classList.add("winner");
+    document.getElementById(`score-${activePlayer}`).textContent = "WIN!";
+    playing = false;
+  } else switchingPlayer();
+});
+
+//==========================restart=========================//
+document.querySelector(".btn-restart").addEventListener("click", reset);
+
+// ===================change color to red when you're almost winning====//
+const almostWin = () => {
+  if ((score[0] / diceNumber) * 100 >= 80) {
+    console.log("helo");
+    document.querySelectorAll(".win-possibility-score")[0].style.color = "red";
+  } else if ((score[1] / diceNumber) * 100 >= 80) {
+    document.querySelectorAll(".win-possibility-score")[1].style.color = "red";
+  }
+};
