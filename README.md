@@ -25,7 +25,7 @@
 **7. You can restart the whole game by clicking the RESTART button.**
 
 
-A feature to add later:
+features to add later:
 
 - Make the computer itself play the game. 
 - 10 seconds timer for each round and when the time is over, switch the player. 
