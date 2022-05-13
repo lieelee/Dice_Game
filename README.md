@@ -26,7 +26,7 @@
 
 
 -------------------------------------------------------------------------------------
-features to add later:
+features to be added later:
 
 - Make the computer itself play the game. 
 - 10 seconds timer for each round and when the time is over, switch the player. 
